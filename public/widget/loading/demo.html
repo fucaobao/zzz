@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>Loading</title>
+<link rel="stylesheet" type="text/css" href="../../css/base.css" />
+<link rel="stylesheet" type="text/css" href="loading.css" />
+<script src="../../jslib/jquery.min.js"></script>
+<script src="../../jslib/require.js"></script>
+<script src="../../jslib/iscroll4.js"></script>
+<script src="../../js/core.js"></script>
+<script src="../../js/binder.js"></script>
+<script src="../../config/config.js"></script>
+<script src="../../jslib/cordova.js"></script>
+<script src="loading.js"></script>
+</head>
+<body>
+<script>
+require(['ZSYWEB.Widget.Loading'], function(data) {
+	ZSYWEB.Widget.Loading.show();
+});
+</script>
+</body>
+</html>

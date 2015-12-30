@@ -1,0 +1,161 @@
+/*widge form*/
+html,body{
+	width:100%;
+	height:100%;
+	overflow:hidden;
+}
+#zsy-g-form{
+    height:45px;
+    line-height:45px;
+    border-bottom:1px solid #ccc;
+    font-size:18px;
+    text-align:center;
+    background:#fff;
+}
+#zsy-g-form-section{
+    font-size:14px;
+    color:#333;
+    overflow:hidden;
+}
+.zsy-u-form{
+    margin-top:10px;
+    background:#fff;
+}
+.zsy-u-form>li{
+    height:45px;
+    line-height:45px;
+    padding:0 10px;
+    border-bottom:1px solid #ccc;
+}
+.zsy-u-form>li:first-child{
+    border-top:1px solid #ccc;
+}
+.zsy-u-form>li>label{
+    float:left;
+    width:80px;
+    margin-right:7px;
+    text-align:right;
+}
+.u-spandb,
+.zsy-u-form>li.zsy-u-submit>span{
+    display:block;
+    overflow:hidden;
+}
+.u-spandb>input{
+    float:left;
+    width:100%;
+    height:44px;
+    line-height:44px/9;
+    border:none;
+    background:none;
+}
+.zsy-u-form>li.error input{
+    color:#DE2C2C;
+}
+/*.zsy-u-form>li.error{
+    position:relative;
+    border-bottom:1px solid #DE2C2C;
+}
+.zsy-u-form>li.error::before{
+    position:absolute;
+    top:-1px;
+    left:0;
+    width:100%;
+    height:1px;
+    background:#DE2C2C;
+    content:'';
+}*/
+.u-span-msg{
+    display:none;
+}
+.zsy-u-form>li.zsy-u-submit{
+    height:auto;
+    padding-top:15px;
+    border:none;
+    background:#E7E7E7;
+}
+.zsy-u-submit>span>input.btn{
+    width:100%;
+    height:45px;
+    line-height:45px;
+    border:none;
+    border-radius:5px;
+    font-size:18px;
+    color:#fff;
+    background:#9C9C9C;
+    cursor:pointer;
+}
+.zsy-u-submit.active>span>input.btn{
+    background:#EB4A19;
+}
+
+/*pc样式*/
+.zsy-u-form-pc{
+    margin:20px auto;
+    width:600px;
+    border:none;
+    background:none;
+}
+.zsy-u-form-pc>li{
+    position:relative;
+    margin-bottom:10px;
+    border:none!important;
+}
+.zsy-u-form-pc>li .u-spandb{
+    padding:0 10px;
+    border:1px solid #DEDEDF;
+    border-radius:5px;
+    background:#fff;
+}
+.zsy-u-form-pc>li.error .u-spandb{
+    border:1px solid #DE2C2C;
+}
+.zsy-u-form-pc>li .u-span-msg{
+    display:block;
+    position:absolute;
+    top:0;
+    left:100%;
+    font-size:0;
+    white-space:nowrap;
+}
+.zsy-u-form-pc>li.error .u-span-msg{
+    font-size:14px;
+    color:#DE2C2C;
+}
+.zsy-u-form-pc>li.success .u-span-msg{
+    display:block;
+    width:25px;
+    height:25px;
+    margin-top:10px;
+    background:url(../../images/success-icon.png) no-repeat 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

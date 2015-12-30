@@ -1,0 +1,30 @@
+#pullDown, #pullUp,#clickDown {
+	padding:0 10px;
+	border-bottom:1px solid #ccc;
+	font-size:14px;
+	color:#888;
+    background:#fff;
+	text-align:center;
+    overflow:hidden;
+}
+#pullDown>span.inlineblock-span, 
+#pullUp>span.inlineblock-span,
+#clickDown>span.inlineblock-span{
+    height:45px;
+    line-height:45px;
+}
+#pullDown>span.time{
+    display:block;
+    padding-bottom:15px;
+    margin-top:-5px;
+}
+.scroll::before{
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:10;
+    width:100%;
+    height:100%;
+    content:'';
+}
+

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>listLoading</title>
+<link rel="stylesheet" type="text/css" href="../../css/base.css" />
+<link rel="stylesheet" type="text/css" href="refresh.css" />
+<script src="../../jslib/jquery.min.js"></script>
+<script src="../../jslib/require.js"></script>
+<script src="../../jslib/iscroll.js"></script>
+<script src="../../js/core.js"></script>
+<script src="../../js/binder.js"></script>
+<script src="../../config/config.js"></script>
+<style>
+
+</style>
+<script>
+require(['ZSYWEB.Services','ZSYWEB.Comm','ZSYWEB.Widget.Refresh'], function(data) {
+    var $http = ZSYWEB.Services
+        , comm= ZSYWEB.Comm
+        , listLoading = ZSYWEB.Widget.Refresh
+        , publishEvents = comm.publishEvents
+        , iscroll = null
+        , m = 10
+        ;
+    // 创建iscroll之前必须要先设置父元素的高度，否则无法拖动iscroll
+    $('#listloading').height($(window).height());
+    var createHtml = function(){
+        var __html = '';
+        for(var i = 0; i < 42; i++){
+            __html += '<li>***********' + i + '***********</li>';
+        }
+        return __html;
+    }
+    // 获取返回的iscroll
+	publishEvents.listen('getISCroll', function( isc ){
+        iscroll = isc;
+    });
+    // 初始化
+    var refreshIscroll = {
+        id : '#listloading',   // id iscroll
+        isTime: false,  // 是否需要显示时间
+        defaultLoader : function(){   // 第一次加载数据
+            var __html = createHtml();
+            $('#order-list').append(__html);
+            // 数据加载完毕需要返回  data默认加载的数据 如果为空或者长度为0，则不会显示 加载更多
+            publishEvents.trigger('defaultLoader');
+        },
+        pullUpAction : function(){   //上拉加载更多
+            setTimeout(function(){
+                m--;
+                var flg = false;
+                var __html = createHtml();
+                console.log(m)
+                if(m < 8){
+                    flg = true;
+                }else{
+                    $('#order-list').append(__html);
+                }
+                // 数据加载完毕需要返回 end为true则为全部数据加载完毕
+                publishEvents.trigger('pullUp',{end: flg});
+            },300);
+            
+        },
+        pullDownAction : function(){  //下拉刷新
+            setTimeout(function(){
+                // 数据加载完毕需要返回
+                publishEvents.trigger('pullDown');
+            },300);
+            
+        }
+    }
+    // 初始化
+    listLoading.setOption(refreshIscroll);
+});
+</script>
+</head>
+<body>
+<div id="listloading">
+    <div>
+        <ul id="order-list"></ul>
+    </div>
+</div>
+</body>
+</html>

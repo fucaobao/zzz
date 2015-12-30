@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>Select</title>
+<link rel="stylesheet" type="text/css" href="../../css/base.css" />
+<script src="../../jslib/jquery.min.js"></script>
+<script src="../../jslib/require.js"></script>
+<script src="../../jslib/iscroll.js"></script>
+<script src="../../js/core.js"></script>
+<script src="../../js/binder.js"></script>
+<script src="../../config/config.js"></script>
+<style>
+html,body{
+	width:auto;
+	margin:20px;
+}
+.zsy-u-select-section{
+	margin-bottom:20px;
+}
+</style>
+<script>
+require(['ZSYWEB.Widget.Select'], function(data) {
+	var Select = new ZSYWEB.Widget.Select()
+	, obj = {
+		id: 'gaga0',
+        maxHeight: 100,      // 最高长度，溢出显示滚动条
+		// render: 'body',         // 默认为body
+		// defaultValue: '请选择...', // 默认提示选择
+		// value: '深圳中顺易',    // 默认显示
+        // key: '1',              // 默认key值
+		data: [{key: '1',value: '张三1'}, {key: '2',value: '张三2'}, {key: '',value: '深圳中顺易'}], // data
+        callback: function(data){    // callback
+            console.log(data)
+        }
+	}
+	, obj1 = {
+		id: 'gaga1',
+		// render: 'body',         // 默认为body
+		// defaultValue: '请选择...', // 默认提示选择
+		value: '深圳中顺易',    // 默认显示
+        key: '1',              // 默认key值
+		data: [{key: '',value: '张三1'}, {key: '',value: '张三2'}, {key: '',value: '深圳中顺易'}], // data
+        callback: function(data){    // callback
+            console.log(data)
+        }
+	}
+	;
+	Select.setOption(obj);
+	Select.setOption(obj1);
+});
+</script>
+</head>
+<body>
+
+</body>
+</html>

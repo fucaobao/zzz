@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>alert</title>
+<link rel="stylesheet" type="text/css" href="../../css/base.css" />
+<link rel="stylesheet" type="text/css" href="alert.css" />
+<script src="../../jslib/jquery.min.js"></script>
+<script src="../../jslib/require.js"></script>
+<script src="../../js/core.js"></script>
+<script src="../../js/binder.js"></script>
+<script src="../../config/config.js"></script>
+<script>
+require(['ZSYWEB.Widget.Alert'], function(data) {
+  	/*第一种：一个确定button，一条message，确定button有回调函数*/
+	// ZSYWEB.Widget.Alert.msgAlert({
+	// 	// dialog
+	// 	title : '',   // title
+	// 	txt : '123456',  // 描述
+	//  width : 220,
+	//  width : 'auto',//自适应
+	//  position : 'leftBot',// top, leftBot, rightBot,center
+	// 	cb : function(){
+	// 		console.info("点击确定");
+	// 	}     
+	// });
+
+    /*第二种：yes no 两个按钮，两个回调函数*/
+	ZSYWEB.Widget.Alert.yesNoAlert({
+		// dialog
+		title : 'alert',   // title
+		txt : '123456',   // 描述
+		width : 220,
+		//width : 'auto',//自适应
+		position : 'center',// top, leftBot, rightBot,center
+		yesBtn : {
+			cls:'',
+			value:'',
+			cb: function(){
+				console.info("点击确定");
+			}
+		},
+		noBtn : {
+			cls:'',
+			value:'',
+			cb: function(){
+				console.info("点击取消");
+			}
+		}
+	});
+});
+</script>
+</head>
+<body>
+</body>
+</html>

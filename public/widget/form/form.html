@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>form表单</title>
+<link rel="stylesheet" type="text/css" href="../../css/base.css" />
+<link rel="stylesheet" type="text/css" href="form.css" />
+<script src="../../jslib/jquery.min.js"></script>
+<script src="../../jslib/require.js"></script>
+<script src="../../jslib/iscroll.js"></script>
+<script src="../../js/core.js"></script>
+<script src="../../js/binder.js"></script>
+<script src="../../config/config.js"></script>
+<script>
+require(['ZSYWEB.Widget.Form'], function(data) {
+    // 目前form表单只支持Validator组件中包含的验证类型
+	var Form = new ZSYWEB.Widget.Form()
+        , obj = {
+            id: 'gaga0',
+            render: '#zsy-g-form-article',
+            // type: 'pc',        // 有两种样式验证， 一种是pc端，一种是手机端 默认为手机端
+            labelWidth: 80,   // 统一设置label的宽度
+            labelCls: 'ga',
+            allEdit: true,   // false不能编辑 true 可以编辑（设置为true可以对单个输入框进行设置是否可以编辑）  默认全部为不能编辑（优先级最高） 
+            allRequired: true,    // false不能必填 true 可以必填（设置为true可以对单个输入框进行设置是否必填）  默认全部为不是必填（优先级最高）
+            data:[
+                {id: "text1", label: '邮箱：', field: 'xsphone1', type: 'email', edit: true, isRequired: true, value: 'gaga1', callback: function(data){
+                    console.log(data)
+                }},
+                {id: "text2", label: '密码：', field: 'xsphone2', minlength: 8, type: 'password', edit: true, isRequired: true, value: '123456789', placeholder: '请输入密码', callback: function(data){
+                    console.log(data)
+                }},
+                {id: "textName1", label: '文本：', field: 'textName', edit: true, maxlength: 20, minlength: 10, isRequired: true, type: 'text', value: 'textName', errorMsg: '长度不能小于10位数', callback: function(data){
+                    console.log(data)
+                }},
+                {id: "text3", label: '电话：', field: 'xsphone3', type: 'phone', value: '188983', placeholder: '请输入电话', maxlength: 11, callback: function(data){
+                    console.log(data)
+                }}
+            ],
+            submitData: {     // 提交数据
+                value: '提交',   // 提交按钮value值
+                isClick: true,     // 是否可以点击
+                clickCallback: function(data){  // 点击回调
+                    // alert('提交')
+                    console.log(data)
+                }
+            },
+            // 数据
+            componentData: {
+                // xsphone3: '12456'
+            },
+            callback: function(data){    // 实时返回所有的验证信息
+                console.log(data)
+            }
+        }
+        ;
+    Form.setOption(obj);
+    $('#zsy-g-form-section').height($(window).height() - 46);
+    var scroll = new IScroll('#zsy-g-form-section');
+});
+</script>
+</head>
+<body>
+<header id="zsy-g-form">form</header>
+<section id="zsy-g-form-section">
+    <article id="zsy-g-form-article"></article>
+</section>
+</body>
+</html>

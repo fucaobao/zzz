@@ -1,0 +1,129 @@
+.header{
+	height:51px;
+	line-height:51px;
+	padding:0 25px;
+	color:#fff;
+	font-size:14px;
+	background:url(../images/bg.png) repeat-x 0 0;
+}
+.header img.l{
+	margin:12px 10px 0 0;
+}
+.header .r a{
+	color:#6699E2;
+}
+.header .r span{
+	margin-right:10px;
+	font-family:'Arial';
+}
+.create-index-cont{
+	height:100%;
+	overflow:hidden;
+}
+.create-index-cont-title{
+	height:40px;
+	line-height:40px;
+	padding-left:295px;
+	border-bottom:1px solid #D9D9D9;
+	font-size:14px;
+	background:#F7F7F7;
+}
+.create-a{
+	top:15px;
+	right:20px;
+	width:145px;
+	height:40px;
+	background:url(../images/imga.png) no-repeat 0 0;
+}
+.create-index-cont-left{
+	height:100%;
+	width:259px;
+	border-right:1px solid #D9D9D9;
+	background:#F7F7F7;
+}
+.create-index-cont-right{
+	margin:20px 20px 0 280px;
+	height:100%;
+	border-radius:0 0 7px 7px;
+	overflow:hidden;
+}
+.create-cont{
+	height:2000px;
+	border-radius:5px;
+	background:#fff;
+	color:#333;
+	overflow:hidden;
+}
+.create-cont-list-div{
+	overflow:auto;
+}
+.create-cont-h3{
+	height:49px;
+	line-height:49px;
+	padding:0 15px;
+	border-radius:5px 5px 0 0;
+	border-bottom:1px solid #CFCFCF;
+	font-weight:normal;
+	font-size:14px;
+	background:url(../images/bg.png) repeat-x 0 -51px;
+}
+.create-cont-h3 a{
+	float:left;
+	margin-left:-15px;
+	padding-left:38px;
+	color:#333;
+	background:url(../images/icon.png) no-repeat -20px -55px;
+}
+.create-index-cont-left{
+	overflow:auto;
+}
+.create-index-cont-left-h3,
+.create-index-cont-left-ul li{
+	height:57px;
+	line-height:57px;
+	padding:0 25px;
+	font-size:14px;
+	color:#333;
+	border-bottom:1px solid #D9D9D9;
+	white-space:nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
+}
+.create-index-cont-left-ul li{
+	cursor:pointer;
+}
+.create-index-cont-left-ul li.line{
+	height:28px;
+	line-height:28px;
+	background:#ECECED;
+	font-size:12px;
+}
+.create-index-cont-left-ul li:hover,
+.create-index-cont-left-ul li.active{
+	color:#fff;
+	background:#7899E7;
+}
+.create-index-cont-left-ul li.line:hover{
+	color:#696969;
+	background:#ECECED;
+	cursor:inherit;
+}
+.col_red{
+	color:#F00;
+}
+.col_green{
+	color:#04AE00;
+}
+.refund-ul li a,
+.refund-ul li p{
+	font-size:14px;
+	color:#6699E2;
+}
+.refund-ul li a{
+	margin:0 10px;
+}
+.sz-div{
+	line-height:30px;
+	margin:8px 0 0 -10px;
+}
+

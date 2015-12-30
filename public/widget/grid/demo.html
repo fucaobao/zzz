@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>grid</title>
+<link rel="stylesheet" type="text/css" href="../../css/base.css" />
+<style>
+body{
+	background:#fff;
+}
+</style>
+<script src="../../jslib/jquery.min.js"></script>
+<script src="../../jslib/jquery-ui.min.js"></script>
+<script src="../../jslib/grid.locale-cn.js"></script>
+<script src="../../jslib/jquery.jqGrid.min.js"></script>
+<script src="../../jslib/require.js"></script>
+<script src="../../js/core.js"></script>
+<script src="../../js/binder.js"></script>
+<script src="../../config/config.js"></script>
+<script>
+require(['ZSYWEB.Widget.Grid'], function(data) {
+	var json = {
+		listdata : []
+	};
+	var grid = new ZSYWEB.Widget.Grid();
+	var obj = {
+		gridDivId: '#tbl_grid',
+		gridPager: '#pager', 
+		datatype: 'local',
+		// autowidth: 'auto',
+		jsonReader: {
+			root: "data",
+            id: "id",
+            records: "records",
+            total: "total",
+            index: 'page'
+		},
+		localData:[
+			{id:01,name:"小白",old:29,sex:"0"},  
+			{id:02,name:"小蓝",old:29,sex:"0"},  
+			{id:03,name:"小雅",old:29,sex:"1"},
+			{id:04,name:"小白",old:29,sex:"0"},  
+			{id:05,name:"小蓝",old:29,sex:"0"},  
+			{id:06,name:"小雅",old:29,sex:"1"},
+			{id:07,name:"小白",old:29,sex:"0"},  
+			{id:08,name:"小蓝",old:29,sex:"0"},  
+			{id:09,name:"小雅",old:29,sex:"1"},
+			{id:10,name:"小白",old:29,sex:"0"},  
+			{id:11,name:"小蓝",old:29,sex:"0"},  
+			{id:12,name:"小雅",old:29,sex:"1"}
+		],
+		headers : [
+			{key:'id', value:'编号', type:'hidden'},
+			{key:'name', value:'名字'}, 
+			{key:'sex', value:'性别', formatter: function(data){if(data === '0'){return '男';} else {return '女';}}}, 
+			{key:'old', value:'年龄'}
+		],
+		customeCol : [{ 
+			key:'opt', 
+			value:'操作', 
+			type:'btn', 
+			content: [
+				{text: '启用', dependency: 'sex', dependencyValue: '男', cls: 'edit', cb: function(data){
+					console.info("edit-----------------"+data.id);
+				}},
+				{text: '禁用', dependency: 'sex', dependencyValue: '女', cls: 'edit', cb: function(data){
+					console.info("edit-----------------"+data.id);
+				}}
+			]
+		}]
+	};
+  	grid.setOption(obj);
+  	//grid.showCol(["name", "old"]);//如果只隐藏一列，就传一个字符串，即可
+  	// grid.hideCol(["name", "old"]);
+});
+</script>
+</head>
+<body>
+<div id="grid-g">
+	<div id="pager"></div>
+	<table id="tbl_grid"></table>
+</div>
+</body>
+</html>
