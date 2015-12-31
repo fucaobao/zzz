@@ -10,11 +10,12 @@ var MongoStore = require('connect-mongo')(session);
 var history = require('./models/history');
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var handler = require('./routes/file');
 var settings = require('./config/settings');
 var app = express();
 
 app.use(session({
-    secret: settings.cookieSecret,
+    secret: settings.db.cookieSecret,
     resave: false,
     saveUninitialized: false,
     genid: function(req) {
@@ -22,10 +23,10 @@ app.use(session({
     },
     key: settings.db,
     cookie: {
-        maxAge: settings.maxAge
+        maxAge: settings.db.maxAge
     },
     store: new MongoStore({
-        url:'mongodb://' + settings.host + ':'+ (settings.port || 27017) + '/' + settings.db
+        url:'mongodb://' + settings.db.host + ':'+ (settings.db.port || 27017) + '/' + settings.db.db
     })
 }));
 
@@ -36,7 +37,7 @@ app.engine('.html', ejs.__express);
 app.set('view engine', 'html');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'images/favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -47,6 +48,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.post('/upload', handler.upload);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');

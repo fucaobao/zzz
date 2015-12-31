@@ -152,38 +152,6 @@ define("ZSYWEB.Util", [], function (){
 			}
 			return obj;
 		},
-		// 获取几分钟前、几小时前、几天前等时间差
-		timeDifference : function(publishTime){
-			var d_seconds
-			  , d_minutes
-			  , d_hours
-			  , d_days
-			  , timeNow = Date.parse(new Date())
-			  , d = (timeNow - publishTime)/1000
-			  ;
-			d_days = parseInt(d/86400);   // 天
-			d_hours = parseInt(d/3600);   // 时   
-			d_minutes = parseInt(d/60);   // 分
-			d_seconds = parseInt(d);      // 秒
-
-			if(d_days > 0 && d_days < 4) {       
-				return d_days+"天前";       
-			}
-			else if(d_days <= 0 && d_hours > 0) {       
-				return d_hours + "小时前";       
-			}
-			else if(d_hours <= 0 && d_minutes > 0) {       
-				return d_minutes+"分钟前";       
-			}
-			else if(d_minutes <= 0 && d_seconds >= 0) {       
-				// return d_seconds+"秒前";
-				return "刚刚之前";       
-			}
-			else{       
-				var s = new Date(publishTime);
-				return s.getFullYear() + '年' + (s.getMonth() + 1) + "月" + s.getDate() + "日 " + s.getHours() + ':' + ':' + s.getMinutes() + ':' + s.getSeconds();
-			}
-		},
 		//获取url中值
 		getQuery: function(name, url) {
             var u = url || window.location.search,
