@@ -31,13 +31,13 @@ define("ZSYWEB.Comm", ["ZSYWEB.Event"], function(require){
 					return false;
 				}
 			}
-		}
+		};
 		return {
 			listen: listen,
 			one: one,
 			remove: remove,
 			trigger: trigger
-		}
+		};
 	})();
 	$.fn.cusbind = function() {
 		$(this).bind.apply($(this), arguments);
@@ -59,6 +59,9 @@ define("ZSYWEB.Comm", ["ZSYWEB.Event"], function(require){
 			$evt.bind($("body"), ".back", "click", function(){
 				$core.pop();
 			});
+		},
+		CONSTS :{
+			FILETYPES :['zip', 'rar']
 		},
 		publishEvents : publishEvents
 	};

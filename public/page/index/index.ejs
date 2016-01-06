@@ -1,5 +1,35 @@
-<input type="file" name='resource' id="resource" />
-<br>
-<input type="button" id="upload" value="上传" />
-<br>
+<div id="alert" class="alert alert-success dn">成功！</div>
+<form class="form-horizontal" role="form">
+    <fieldset>
+        <legend>环境：</legend>
+        <div class="form-group">
+            <label for="select" class="col-sm-2 control-label">选择环境：</label>
+            <div class="col-sm-2">
+                <select id="select" class="form-control">
+                </select>
+            </div>
+            <label class="col-sm-2 control-label" for="ds_username">选择文件：</label>
+            <div class="col-sm-2">
+                <input class="form-control" name="resource" id="resource" type="file" />
+            </div>
+            <input class="btn btn-success" id="upload" type="button" value="上传" />
+        </div>
+    </fieldset>
+</form>
+<div class="form-horizontal search-list">
+    <fieldset>
+        <legend>文件列表：<span class="warning">(目前只支持单级目录，不支持层级目录)</legend>
+    </fieldset>
+    <table class="table table-bordered">
+	   <thead>
+	      <tr>
+	         <th>文件名</th>
+	         <th>文件大小</th>
+	         <th>操作</th>
+	      </tr>
+	   </thead>
+	   <tbody id="files">
+	   </tbody>
+</table>
+</div>
 <script type="text/javascript" src="/page/index/index.js"></script>

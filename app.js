@@ -7,26 +7,26 @@ var bodyParser = require('body-parser');
 var ejs = require('ejs');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
-var history = require('./models/history');
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var handler = require('./routes/file');
-var settings = require('./config/settings');
+var handler = require('./routes/handler');
+var env = require('./routes/env');
+var settings = require('./config/config').db;
 var app = express();
 
 app.use(session({
-    secret: settings.db.cookieSecret,
+    secret: settings.cookieSecret,
     resave: false,
     saveUninitialized: false,
     genid: function(req) {
         return genUUID(); // use UUIDs for session IDs
     },
-    key: settings.db,
+    key: settings,
     cookie: {
-        maxAge: settings.db.maxAge
+        maxAge: settings.maxAge
     },
     store: new MongoStore({
-        url:'mongodb://' + settings.db.host + ':'+ (settings.db.port || 27017) + '/' + settings.db.db
+        url:'mongodb://' + settings.host + ':'+ (settings.port || 27017) + '/' + settings.db
     })
 }));
 
@@ -48,6 +48,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.get('/getEnv', env.getEnv);
+app.get('/getFiles', handler.listFiles);
+app.get('/download/:id', handler.download);
 app.post('/upload', handler.upload);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -62,6 +65,7 @@ if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
         res.render('page/404/404', {
+            title: '404',
             message: err.message,
             error: err
         });
