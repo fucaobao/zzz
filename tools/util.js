@@ -84,9 +84,7 @@ var util = {
         if (this.isObject(obj)) {
             this.elements.push(obj);
             if (obj.hasOwnProperty('children')) {
-                for (var i = 0; i < obj.children.length; i++) {
-                    this.getElments(obj.children[i]);
-                }
+                this.getElments(obj.children);
                 delete obj.children;
             }
         } else if (this.isArray(obj)) {
