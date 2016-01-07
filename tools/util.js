@@ -77,6 +77,29 @@ var util = {
             return '';
         }
         return filename.substring(dot + 1);
+    },
+    //获取appConfig中的对象
+    elements: [],
+    getElments: function(obj) {
+        if (this.isObject(obj)) {
+            this.elements.push(obj);
+            if (obj.hasOwnProperty('children')) {
+                for (var i = 0; i < obj.children.length; i++) {
+                    this.getElments(obj.children[i]);
+                }
+                delete obj.children;
+            }
+        } else if (this.isArray(obj)) {
+            for (var j = 0; j < obj.length; j++) {
+                this.getElments(obj[j]);
+            }
+        }
+    },
+    isArray: function(value) {
+        return Object.prototype.toString.call(value) === '[object Array]';
+    },
+    isObject: function(value) {
+        return Object.prototype.toString.call(value) === '[object Object]';
     }
 };
 module.exports = util;
