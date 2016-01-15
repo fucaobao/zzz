@@ -14,6 +14,9 @@ var FileSchema = new Schema({
     operatetime: String, //上传/下载时间
     env: String, //环境
     envDesc: String, //环境描述
+    downIOS: String, //iOS下载链接
+    downAndroid: String, //Android下载链接
+    ver: String, //版本号
     createtime: {
         'type': Date,
         'default': util.getTimestamp(2)
@@ -25,31 +28,23 @@ var FileDAO = function() {};
 FileDAO.prototype.save = function(obj, callback) {
     var instance = new File(obj);
     instance.save(function(err) {
-        callback(err);
+        typeof callback === 'function' && callback(err);
     });
 };
 //删除
 FileDAO.prototype.remove = function(obj, callback) {
-
+    //
 };
-//更新
+//修改
 FileDAO.prototype.update = function(obj, callback) {
-
+    //
 };
 //查找
 FileDAO.prototype.find = function(obj, callback) {
-    var query = {};
-    for (var key in obj) {
-        if (obj[key]) {
-            query[key] = obj[key];
-        }
-    }
-    File.find(query, function(err, obj) {
-        callback(err, obj);
+    File.find(obj, function(err, obj) {
+        typeof callback === 'function' && callback(err, obj);
     });
 };
 //分页查询
-FileDAO.prototype.findByPage = function(obj, callback) {
-    
-};
+FileDAO.prototype.findByPage = function(obj, callback) {};
 module.exports = new FileDAO();

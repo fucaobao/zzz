@@ -1,0 +1,52 @@
+{
+    "ver": 201512231,
+    "module": [{
+        "id": "com.csn.wealth",
+        "ver": 5,
+        "name": "理财",
+        "type": "native",
+        "url": "",
+        "downIOS": "",
+        "downAndroid": "MyHomeWealth.apk",
+        "signIOS": "",
+        "signAndroid": "",
+        "active": 1
+    }, {
+        "id": "com.csn.ct",
+        "name": "消费",
+        "type": "web",
+        "url": "/page/product/index.html",
+        "ver": 1,
+        "downIOS": "http://nos.126.net/zsyapp/com.csn.ct@1_iOS.zip",
+        "downAndroid": "http://nos.126.net/zsyapp/com.csn.ct@1_android.zip",
+        "signIOS": "",
+        "signAndroid": "",
+        "children": [{
+            "id": "com.csn.ct.page",
+            "ver": 1,
+            "folder": "/",
+            "downIOS": "http://nos.126.net/zsyapp/com.csn.ct.page@1_iOS.zip",
+            "downAndroid": "http://nos.126.net/zsyapp/com.csn.ct.page@1_android.zip",
+            "signIOS": "",
+            "signAndroid": "",
+            "children": [{
+                "id": "com.csn.ct.page.product",
+                "ver": 2,
+                "folder": "/page/",
+                "downIOS": "http://nos.126.net/zsyapp/com.csn.ct.page.product@2_iOS.zip",
+                "downAndroid": "http://nos.126.net/zsyapp/com.csn.ct.page.product@2_android.zip",
+                "signIOS": "",
+                "signAndroid": ""
+            }, {
+                "id": "com.csn.ct.page.rights",
+                "ver": 1,
+                "folder": "/page/",
+                "downIOS": "http://nos.126.net/zsyapp/com.csn.ct.page.rights@1_iOS.zip",
+                "downAndroid": "http://nos.126.net/zsyapp/com.csn.ct.page.rights@1_android.zip",
+                "signIOS": "",
+                "signAndroid": ""
+            }]
+        }],
+        "active": 1
+    }]
+}

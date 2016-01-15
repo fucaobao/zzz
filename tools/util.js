@@ -7,13 +7,7 @@ var util = {
     //2:2015-12-31 12:23:35.123
     getTimestamp: function(flag, time) {
         flag = flag || 0;
-        time = time || 0;
-        var dt;
-        if (time) {
-            dt = new Date(time);
-        } else {
-            dt = new Date();
-        }
+        var dt = new Date(time || new Date());
         var y = dt.getFullYear(),
             M = dt.getMonth() + 1,
             d = dt.getDate(),
@@ -53,13 +47,13 @@ var util = {
         }
     },
     //获取文件的md5值
-    getMD5: function(filename, callback) {
+    getMD5: function(filename, cb) {
         var rs = fs.createReadStream(filename);
         var hash = crypto.createHash('md5');
         rs.on('data', hash.update.bind(hash));
         rs.on('end', function() {
             var md5 = hash.digest('hex');
-            callback(md5);
+            typeof cb === 'function' && cb(md5);
         });
     },
     //根据url获取filename
@@ -70,6 +64,14 @@ var util = {
         }
         return query.substring(dot + 1);
     },
+    //根据filename修改url路径
+    changePathname: function(url, filename) {
+        var slash = url.lastIndexOf('/');
+        if (slash === -1) {
+            return filename;
+        }
+        return url.substring(0, slash + 1) + filename;
+    },
     //根据文件名获取文件类型
     getFileType: function(filename) {
         var dot = filename.lastIndexOf('.');
@@ -78,20 +80,9 @@ var util = {
         }
         return filename.substring(dot + 1);
     },
-    //获取appConfig中的对象
-    elements: [],
-    getElments: function(obj) {
-        if (this.isObject(obj)) {
-            this.elements.push(obj);
-            if (obj.hasOwnProperty('children')) {
-                this.getElments(obj.children);
-                delete obj.children;
-            }
-        } else if (this.isArray(obj)) {
-            for (var j = 0; j < obj.length; j++) {
-                this.getElments(obj[j]);
-            }
-        }
+    //获取随机数
+    genUUID: function() {
+        return Math.random().toString(36).substring(2);
     },
     isArray: function(value) {
         return Object.prototype.toString.call(value) === '[object Array]';

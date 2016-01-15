@@ -1,4 +1,5 @@
-<div id="alert" class="alert alert-success dn">成功！</div>
+<div id="alert" class="alert alert-success <%= show %>"><%= message %></div>
+<input type="hidden" id="env" value="<%= env %>"/>
 <form class="form-horizontal" role="form">
     <fieldset>
         <legend>环境：</legend>
@@ -8,11 +9,11 @@
                 <select id="select" class="form-control">
                 </select>
             </div>
-            <label class="col-sm-2 control-label" for="ds_username">选择文件：</label>
+<!--             <label class="col-sm-2 control-label">选择文件：</label>
             <div class="col-sm-2">
                 <input class="form-control" name="resource" id="resource" type="file" />
             </div>
-            <input class="btn btn-success" id="upload" type="button" value="上传" />
+            <input class="btn btn-success" id="upload" type="button" value="上传" /> -->
         </div>
     </fieldset>
 </form>
@@ -20,15 +21,22 @@
     <fieldset>
         <legend>文件列表：<span class="warning">(目前只支持单级目录，不支持层级目录)</legend>
     </fieldset>
-    <table class="table table-bordered">
+    <table class="table table-bordered"  id="table">
 	   <thead>
 	      <tr>
-	         <th>文件名</th>
-	         <th>文件大小</th>
-	         <th>操作</th>
+	         <th style="width:10%;">id</th>
+             <th style="width:5%;">ver</th>
+             <th style="width:5%;">name</th>
+             <th style="width:5%;">type</th>
+             <th style="width:10%;">url</th>
+             <th style="width:15%;">downIOS</th>
+             <th style="width:15%;">downAndroid</th>
+             <th style="width:10%;">signIOS</th>
+	         <th style="width:10%;">signAndroid</th>
+	         <th style="width:15%;">操作</th>
 	      </tr>
 	   </thead>
-	   <tbody id="files">
+	   <tbody id="tbody">
 	   </tbody>
 </table>
 </div>

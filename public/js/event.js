@@ -1,5 +1,4 @@
 define("ZSYWEB.Event", [], function (){
-    console.info("RUN EVENT------------");
     window.scorllAnitimate = true;
     var startTime = null;
     /******************BROWSER Event Mode**********************/
@@ -104,7 +103,7 @@ define("ZSYWEB.Event", [], function (){
                     var endEvtHandler = function(dom_,e, fn){
                         // e.stopPropagation();
                         var ev = _returnData(e);
-                        var now = Date.now();
+                        var now = new Date().getTime();
                         var pt_pos = getTouchPos(ev);
                         var dist = getDist(ct_pos , pt_pos);
                         // console.info(window.iscrollMoveFlg);
@@ -183,7 +182,7 @@ define("ZSYWEB.Event", [], function (){
                         var ev = _returnData(e);
                         pt_pos = ct_pos = getTouchPos(ev);
                         pt_move_pos = pt_pos;
-                        pt_time = Date.now();
+                        pt_time = new Date().getTime();
                         startEvent(dom_, ev);
                     }
                     var moveEvtHandler = function(dom_, e){
@@ -208,7 +207,7 @@ define("ZSYWEB.Event", [], function (){
                         var dir;
                         var ev = _returnData(e);
                         pt_up_pos = ct_pos;
-                        pt_up_time = Date.now();
+                        pt_up_time = new Date().getTime();
                         if(getDist(pt_pos,pt_up_pos) > SWIPE_DISTANCE){
                             //pt_up_time - pt_time
                             dir = getSwipeDirection(pt_up_pos,pt_pos);
@@ -251,7 +250,7 @@ define("ZSYWEB.Event", [], function (){
                         var touches = e.touches;
                         if(!touches || touches.length == 1){//鼠标点击或者单指点击
                             pt_pos = ct_pos = getTouchPos(ev);
-                            pt_time = Date.now();
+                            pt_time = new Date().getTime();
                             holdTimeId = setTimeout(function(){
                                 if(touches && touches.length != 1) return;
                                 if(getDist(pt_pos,ct_pos) < HOLD_DISTANCE){

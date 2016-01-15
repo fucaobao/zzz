@@ -1,17 +1,24 @@
+/**
+ * 
+ * @authors wangjiping (wangjiping@myhome.163.com)
+ * @date    2016-01-14 09:54:28
+ * @version 0.1
+ */
 var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
+var path = require('path');             
+var favicon = require('serve-favicon');                 //网站icon(favicon.ico)
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var ejs = require('ejs');
+var ejs = require('ejs');                               //ejs引擎
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var routes = require('./routes/index');
-var users = require('./routes/users');
-var handler = require('./routes/handler');
-var env = require('./routes/env');
+var users = require('./routes/users');                  //处理用户信息(暂时没有处理)
+var handler = require('./routes/handler');              //处理上传文件和下载文件
+var env = require('./routes/env');                      //获取环境配置信息
 var settings = require('./config/config').db;
+var util = require('./tools/util');                     //工具对象
 var app = express();
 
 app.use(session({
@@ -19,7 +26,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     genid: function(req) {
-        return genUUID(); // use UUIDs for session IDs
+        return util.genUUID(); // use UUIDs for session IDs
     },
     key: settings,
     cookie: {
@@ -36,7 +43,7 @@ app.set('views', path.join(__dirname, 'public'));
 app.engine('.html', ejs.__express);
 app.set('view engine', 'html');
 
-// uncomment after placing your favicon in /public
+// favicon.ico位置
 app.use(favicon(path.join(__dirname, 'public', 'images/favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -44,12 +51,15 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(cookieParser());
+//外部公共文件路径
 app.use(express.static(path.join(__dirname, 'public')));
 
+//处理请求
 app.use('/', routes);
 app.use('/users', users);
 app.get('/getEnv', env.getEnv);
-app.get('/getFiles', handler.listFiles);
+app.get('/getModules', handler.getModules);
+// app.get('/getFiles', handler.listFiles);
 app.get('/download/:id', handler.download);
 app.post('/upload', handler.upload);
 // catch 404 and forward to error handler
@@ -73,6 +83,7 @@ if (app.get('env') === 'development') {
 }
 // production error handler
 // no stacktraces leaked to user
+// 处理404请求
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('page/404/404', {
@@ -82,9 +93,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
-function genUUID() {
-    return Math.random().toString(36).substring(2);
-}
 var server = app.listen(app.get('port'), function() {
     console.log('Express server listening on port ' + server.address().port);
 });

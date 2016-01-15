@@ -1,16 +1,30 @@
 body {
-  padding: 50px;
+    padding: 50px;
+}
+.warning {
+    color: red;
 }
 
-.warning {
-	color:red;
+.search-list {
+    margin-top: 50px;
 }
-.search-list{
-	margin-top: 50px;
+
+#table {
+    table-layout: fixed;
+    overflow: hidden;
 }
-.width40{
-	width: 40%;
+#table th,#table td  {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-.width20{
-	width: 20%;
+
+.file {
+	display:block;
+	opacity:0;
+	z-index:1;
+	position:absolute;
+}
+.upload,.download {
+    margin:5px;
 }
