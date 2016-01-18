@@ -23,11 +23,9 @@ exports.upload = function(req, res, next) {
                 'message': err || '系统繁忙，请稍后再试'
             });
         }
-        console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
         var env = fields.env; //环境
         var fileid = fields.id; //文件ID
         var platform = fields.platform;
-        console.log(platform)
         //配置文件名
         var appConfig = path.join(path.resolve('./'), 'config', 'appConfig_' + env + '.json');
         var filename = files.file.name;
@@ -180,9 +178,36 @@ function handlerUpload(obj) {
             }
             util.getMD5(oldPath, function(md5) {
                 fs.unlink(oldPath); //删除文件
-                obj.md5 = md5;
-                console.log(obj);
-                handlerConfig.updateModule(obj);
+                handlerConfig.updateModule(obj, function() {
+                    info.save({
+                        'env': env,
+                        'envDesc': settings.envDesc[env],
+                        'operatetime': util.getTimestamp(1),
+                        'username': 'admin',
+                        'filename': targetName,
+                        'filetype': obj.type,
+                        'operatetype': 'upload',
+                        'filepath': targetName,
+                        'filemd5': md5,
+                        'downIOS': obj.downIOS,
+                        'downAndroid': obj.downAndroid,
+                        'ver': obj.ver,
+                        'filesize': util.formatSize(obj.size),
+                        'status': 0 //成功
+                    }, function(err) {
+                        if (err) {
+                            obj.res.send({
+                                'code': 1,
+                                'message': '失败'
+                            });
+                        } else {
+                            obj.res.send({
+                                'code': 0,
+                                'message': '成功'
+                            });
+                        }
+                    });
+                });
             });
         });
     });

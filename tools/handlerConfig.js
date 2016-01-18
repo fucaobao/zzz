@@ -1,8 +1,5 @@
 var fs = require('fs');
-var path = require('path');
 var util = require('./util');
-var info = require('../models/file');
-var settings = require('../config/config');
 var handlerConfig = {
     modules: [],
     targetModule: {},
@@ -42,7 +39,7 @@ var handlerConfig = {
         }
     },
     //更新module
-    updateModule: function(obj) {
+    updateModule: function(obj, cb) {
         var self = this;
         var appConfig = obj.appConfig;
         var fileid = obj.fileid;
@@ -76,41 +73,17 @@ var handlerConfig = {
             } else if (platform === 'android') {
                 obj.downAndroid = tmpModule.downAndroid = util.changePathname(tmpModule.downAndroid, targetName);
             }
-            fs.writeFile(appConfig, JSON.stringify(config), {
+            fs.writeFile(appConfig, JSON.stringify(config, function(key, value) {
+                //忽略index属性
+                if (key == 'index') {
+                    return undefined;
+                }
+                return value;
+            }, 4), {
                 encoding: 'utf8' //该参数可以不写，encoding的默认值就是utf8
             }, function() {
-                self.updateMongod(obj);
+                typeof cb === 'function' && cb(obj);
             });
-        });
-    },
-    updateMongod: function(obj) {
-        info.save({
-            'env': obj.env,
-            'envDesc': settings.envDesc[obj.env],
-            'operatetime': util.getTimestamp(1),
-            'username': 'admin',
-            'filename': obj.targetName,
-            'filetype': obj.type,
-            'operatetype': 'upload',
-            'filepath': obj.targetName,
-            'filemd5': obj.md5,
-            'downIOS': obj.downIOS,
-            'downAndroid': obj.downAndroid,
-            'ver': obj.ver,
-            'filesize': util.formatSize(obj.size),
-            'status': 0 //成功
-        }, function(err) {
-            if (err) {
-                obj.res.send({
-                    'code': 1,
-                    'message': '失败'
-                });
-            } else {
-                obj.res.send({
-                    'code': 0,
-                    'message': '成功'
-                });
-            }
         });
     }
 };
